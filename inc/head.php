@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,11 +46,30 @@
                             Cart
                         </a>
                     </li>
+                    <?php if (!isset($_SESSION['user'])):?>
+                    <li>
+                        <a href="/login.php" class="btn btn-success navbar-btn">
+                            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                            Login
+                        </a>
+                    </li>
+                    <?php endif; ?>
+                    <?php if (isset($_SESSION['user'])):?>
+                    <li>
+                        <a href="/logout.php" class="btn btn-danger navbar-btn">
+                            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                            Logout
+                        </a>
+                    </li>
+                    <?php endif; ?>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
     <div class="container-fluid text-right">
-        <strong>Hello Wilder !</strong>
+        <?php if (isset($_SESSION['user'])):?>
+        <strong>Hello <?php echo $_SESSION['user'] ?></strong>
+        <?php else: ?> <strong>Hello Wilders</strong>
+        <?php endif; ?>
     </div>
 </header>
